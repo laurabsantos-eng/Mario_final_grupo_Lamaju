@@ -1,0 +1,623 @@
+/* =====================================
+   PIXEL WORD - ESTILO DO SITE
+   ===================================== */
+
+:root {
+    --roxo: #8b35e8;
+    --roxo-claro: #bd79ff;
+    --fundo: #1b1035;
+    --fundo-claro: #28134b;
+    --branco: #fffaff;
+    --texto: #eee7ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--fundo);
+    color: var(--branco);
+    font-family: "Nunito", Arial, sans-serif;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* CABEÇALHO */
+
+.pw-header {
+    min-height: 82px;
+    padding: 12px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background: #170d2d;
+    border-bottom: 3px solid #52228c;
+}
+
+.pw-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Press Start 2P", monospace;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.pw-logo-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    background: #8b35e8;
+    color: white;
+    border: 4px solid #d5a3ff;
+    border-radius: 10px;
+    font-size: 25px;
+    box-shadow: 4px 4px 0 #451477;
+}
+
+.pw-purple,
+.pw-footer-brand span {
+    color: var(--roxo-claro);
+}
+
+.pw-nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.pw-nav a {
+    font-weight: 800;
+    transition: .3s;
+}
+
+.pw-nav a:hover {
+    color: var(--roxo-claro);
+}
+
+.pw-header-button {
+    background: var(--roxo);
+    padding: 11px 18px;
+    border-radius: 14px;
+    font-weight: 900;
+    box-shadow: 0 5px 0 #4d1b83;
+    transition: .3s;
+}
+
+.pw-header-button:hover {
+    background: #a84cff;
+    transform: translateY(-3px);
+}
+
+
+/* INÍCIO */
+
+.pw-hero {
+    min-height: 430px;
+    padding: 55px 7%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 25px;
+    overflow: hidden;
+    background: linear-gradient(
+        120deg,
+        #176bd4,
+        #39b9f1,
+        #8edcf9
+    );
+}
+
+.pw-hero-copy {
+    max-width: 600px;
+    z-index: 2;
+}
+
+.pw-kicker {
+    color: #f8eaff;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.pw-hero h1 {
+    margin: 17px 0;
+    font-size: clamp(32px, 4.4vw, 58px);
+    line-height: 1.08;
+    font-weight: 900;
+    text-shadow: 0 4px 0 rgba(28, 25, 80, .18);
+}
+
+.pw-hero h1 span {
+    color: #ffe76c;
+}
+
+.pw-hero-copy p {
+    max-width: 490px;
+    margin-bottom: 27px;
+    color: #f5faff;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+/* BOTÕES */
+
+.pw-button {
+    display: inline-block;
+    padding: 14px 23px;
+    border: 3px solid #35145e;
+    border-radius: 16px;
+    background: var(--roxo);
+    color: white;
+    font-weight: 900;
+    box-shadow: 0 6px 0 #42176d;
+    transition: .3s;
+}
+
+.pw-button:hover {
+    background: #a84cff;
+    transform: translateY(-3px);
+}
+
+
+/* CENÁRIO PIXEL ART */
+
+.pw-hero-scene {
+    position: relative;
+    min-height: 300px;
+}
+
+.pw-cloud {
+    position: absolute;
+    color: white;
+    font-size: 66px;
+    opacity: .9;
+}
+
+.cloud-a {
+    top: 5px;
+    left: 5%;
+}
+
+.cloud-b {
+    top: 48px;
+    right: 4%;
+    font-size: 48px;
+}
+
+.pw-star {
+    position: absolute;
+    color: #ffed65;
+    font-size: 48px;
+    text-shadow: 3px 4px 0 #d98b24;
+}
+
+.star-a {
+    top: 20px;
+    right: 23%;
+}
+
+.star-b {
+    top: 95px;
+    left: 9%;
+    color: white;
+}
+
+.pw-coin {
+    position: absolute;
+    z-index: 2;
+    width: 35px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border: 4px solid #a65b13;
+    border-radius: 50%;
+    background: #ffd83e;
+    color: #fff6a4;
+    font-size: 12px;
+    box-shadow: inset 0 0 0 3px #fff18a;
+}
+
+.coin-a {
+    top: 48%;
+    left: 15%;
+}
+
+.coin-b {
+    top: 31%;
+    left: 38%;
+}
+
+.coin-c {
+    top: 42%;
+    right: 12%;
+}
+
+.pw-hero-character {
+    position: absolute;
+    z-index: 3;
+    left: 38%;
+    top: 22%;
+    font-size: clamp(90px, 13vw, 155px);
+    filter: drop-shadow(5px 7px 0 rgba(34,24,75,.3));
+    transform: rotate(-8deg);
+}
+
+.pw-platform {
+    position: absolute;
+    bottom: 0;
+    height: 54px;
+    border: 5px solid #236d38;
+    border-bottom: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        #70d94b 0 22px,
+        #8bea5b 22px 44px
+    );
+}
+
+.platform-a {
+    left: -8%;
+    width: 38%;
+}
+
+.platform-b {
+    left: 35%;
+    width: 35%;
+    bottom: 25px;
+}
+
+.platform-c {
+    right: -12%;
+    width: 37%;
+}
+
+
+/* SOBRE E SERVIÇOS */
+
+.pw-content {
+    max-width: 1250px;
+    margin: auto;
+    padding: 38px 5%;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 22px;
+    background: linear-gradient(
+        135deg,
+        #2c1552,
+        #1b1035
+    );
+}
+
+.pw-card {
+    padding: 27px;
+    border: 2px solid #9745ed;
+    border-radius: 22px;
+    background: rgba(20, 12, 42, .72);
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);
+}
+
+.pw-card-title {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 17px;
+}
+
+.pw-card-title h2 {
+    font-size: 23px;
+    line-height: 1.2;
+}
+
+.pw-card-icon {
+    font-size: 30px;
+}
+
+.pw-card p {
+    color: var(--texto);
+    font-size: 16px;
+}
+
+.pw-about p + p {
+    margin-top: 12px;
+}
+
+
+/* LISTA DE SERVIÇOS */
+
+.pw-service-list {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+}
+
+.pw-service-list li {
+    color: var(--texto);
+    padding-left: 31px;
+    position: relative;
+}
+
+.pw-service-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+    border-radius: 7px;
+    background: var(--roxo);
+    color: white;
+    font-weight: 900;
+}
+
+
+/* SEÇÃO DO JOGO */
+
+.pw-game-section {
+    padding: 65px 6%;
+    background: linear-gradient(
+        180deg,
+        #241044,
+        #32166a
+    );
+}
+
+.pw-section-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.pw-section-heading h2 {
+    margin: 10px 0 5px;
+    font-size: clamp(27px, 4vw, 39px);
+}
+
+.pw-section-heading p {
+    color: #cfc2e8;
+}
+
+
+/* CARTÃO DO JOGO */
+
+.pw-game-card {
+    max-width: 1000px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    overflow: hidden;
+    border: 2px solid #a34cf3;
+    border-radius: 24px;
+    background: #1b1035;
+    box-shadow: 0 15px 35px rgba(0,0,0,.25);
+}
+
+.pw-game-art {
+    min-height: 310px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        #45bdf5 0%,
+        #a4e9ff 72%,
+        #73d34f 73%
+    );
+}
+
+.pw-game-cloud {
+    position: absolute;
+    top: 17px;
+    left: 15px;
+    font-size: 24px;
+}
+
+.pw-game-character {
+    position: absolute;
+    z-index: 2;
+    left: 35%;
+    top: 27%;
+    font-size: 100px;
+    transform: rotate(-8deg);
+}
+
+.pw-game-coins {
+    position: absolute;
+    top: 36%;
+    right: 7%;
+    font-size: 24px;
+}
+
+.pw-game-ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 65px;
+    border-top: 12px solid #8ce653;
+    background: repeating-linear-gradient(
+        135deg,
+        #8a4c2d 0 18px,
+        #a75b36 18px 36px
+    );
+}
+
+.pw-game-info {
+    padding: 30px;
+}
+
+.pw-game-label {
+    color: var(--roxo-claro);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+
+.pw-game-info h3 {
+    margin: 8px 0 12px;
+    color: #c27cff;
+    font-size: 30px;
+}
+
+.pw-game-info > p,
+.pw-game-facts p {
+    color: var(--texto);
+}
+
+.pw-game-facts {
+    margin: 17px 0;
+    padding: 15px;
+    border-radius: 13px;
+    background: rgba(255,255,255,.06);
+}
+
+.pw-game-facts p + p {
+    margin-top: 8px;
+}
+
+.pw-play-button {
+    margin-top: 5px;
+}
+
+.pw-note {
+    display: block;
+    margin-top: 12px;
+    color: #cfc2e8;
+    font-size: 12px;
+}
+
+
+/* RODAPÉ */
+
+.pw-footer {
+    padding: 25px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    background: #170d2d;
+    border-top: 3px solid #54218e;
+}
+
+.pw-footer-brand {
+    font-family: "Press Start 2P", monospace;
+    font-size: 17px;
+}
+
+.pw-footer p {
+    color: var(--roxo-claro);
+    font-weight: 900;
+}
+
+.pw-back-top {
+    color: var(--texto);
+    font-weight: 800;
+}
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 850px) {
+
+    .pw-header {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .pw-nav {
+        order: 3;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .pw-hero {
+        grid-template-columns: 1fr;
+        padding-top: 45px;
+    }
+
+    .pw-hero-scene {
+        min-height: 250px;
+    }
+
+    .pw-content {
+        grid-template-columns: 1fr;
+    }
+
+    .pw-game-card {
+        grid-template-columns: 1fr;
+    }
+
+    .pw-game-art {
+        min-height: 250px;
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .pw-header {
+        padding: 14px 4%;
+    }
+
+    .pw-brand {
+        font-size: 12px;
+    }
+
+    .pw-logo-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .pw-header-button {
+        padding: 9px 12px;
+        font-size: 13px;
+    }
+
+    .pw-nav {
+        gap: 13px;
+        font-size: 14px;
+    }
+
+    .pw-hero {
+        padding: 42px 6% 25px;
+    }
+
+    .pw-hero-copy p {
+        font-size: 16px;
+    }
+
+    .pw-hero-scene {
+        min-height: 205px;
+    }
+
+    .pw-card {
+        padding: 21px;
+    }
+
+    .pw-card-title h2 {
+        font-size: 19px;
+    }
+
+    .pw-game-info {
+        padding: 23px;
+    }
+
+    .pw-footer {
+        flex-direction: column;
+        text-align: center;
+    }
+}
