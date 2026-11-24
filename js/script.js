@@ -68,6 +68,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const CROWN_LIFETIME = 1800;      // quanto tempo a coroa fica na tela (ms)
     const CROWN_SPAWN_MIN = 300;      // tempo mínimo até a próxima coroa (ms)
     const CROWN_SPAWN_MAX = 800;      // tempo máximo até a próxima coroa (ms)
+
+    // --- Coroa que voa até o personagem ---
+    const CROWN_SPEED = 0.4;          // velocidade da coroa (px por ms). 0.4 = 400 px por segundo
+    const CROWN_AIM_EXTRA = 40;       // a coroa mira até X px acima da cabeça (0 = sempre mira no corpo, sem precisar pular)
+    const CROWN_MIN_START_DIST = 300; // distância mínima entre onde ela nasce e o personagem (px)
+    const CROWN_OVERSHOOT = 1.6;      // 1 = some ao chegar no personagem | 1.6 = passa direto e some depois
+    let crownAnim = null;             // animação de voo da coroa
+
+    // DIAGNÓSTICO: com true, o Console (F12) mostra o que a coroa está fazendo. Pode apagar depois.
+    const CROWN_DEBUG = true;
+    if (CROWN_DEBUG) console.log('[Coroa] ✔ script com voo carregado (versão 3)');
     let crownShownAt = 0;             // momento em que a coroa apareceu
 
     let crownSpawnTimer = null;
@@ -350,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
         crownSpawnTimer = setTimeout(spawnCrown, randomBetween(CROWN_SPAWN_MIN, CROWN_SPAWN_MAX));
     }
 
-    // Mostra a coroa na tela
+    // Mostra a coroa em um ponto aleatório da tela e faz ela voar até o personagem
     function spawnCrown() {
         if (!isPlaying) return;
 
@@ -360,16 +371,54 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        crown.style.left = `${randomBetween(CROWN_MIN_X, CROWN_MAX_X)}px`;
-        // altura baseada no tamanho do personagem atual (Mario, Wanda e Cosmo têm alturas diferentes)
-        const charHeight = mario.offsetHeight;
-        crown.style.bottom = `${randomBetween(charHeight + CROWN_EXTRA_MIN, charHeight + CROWN_EXTRA_MAX)}px`;
+        const board = gameBoard.getBoundingClientRect();
+        const m = mario.getBoundingClientRect();
+        const cw = crown.offsetWidth || 60;     // tamanho da coroa (muda por mundo)
+        const ch = crown.offsetHeight || 60;
+
+        // ALVO: do meio do corpo do personagem até um pouco acima da cabeça (posição relativa ao quadro do jogo)
+        const targetX = m.left - board.left + m.width / 2 - cw / 2;
+        const bodyY = m.top - board.top + m.height / 2 - ch / 2;
+        const targetY = bodyY - randomBetween(0, Math.round(m.height / 2 + CROWN_AIM_EXTRA));
+
+        // NASCIMENTO: ponto aleatório da tela (parte de cima/meio), longe o bastante do personagem
+        let startX, startY, tries = 0;
+        do {
+            startX = randomBetween(0, Math.max(0, Math.floor(board.width - cw)));
+            startY = randomBetween(0, Math.max(0, Math.floor(board.height * 0.65 - ch)));
+            tries++;
+        } while (Math.hypot(targetX - startX, targetY - startY) < CROWN_MIN_START_DIST && tries < 15);
+
+        // posiciona a coroa no ponto de nascimento (usa "top" em vez de "bottom")
+        crown.style.left = `${startX}px`;
+        crown.style.top = `${startY}px`;
+        crown.style.bottom = 'auto';
+
+        // VOO: linha reta até o alvo, na velocidade CROWN_SPEED
+        const dx = targetX - startX;
+        const dy = targetY - startY;
+        const duration = Math.max(600, (Math.hypot(dx, dy) / CROWN_SPEED) * CROWN_OVERSHOOT);
+
+        if (crownAnim) crownAnim.cancel();
+        crownAnim = crown.animate(
+            [
+                { transform: 'translate(0px, 0px)' },
+                { transform: `translate(${dx * CROWN_OVERSHOOT}px, ${dy * CROWN_OVERSHOOT}px)` }
+            ],
+            { duration, easing: 'linear', fill: 'forwards' }
+        );
+
+        if (CROWN_DEBUG) {
+            console.log(`[Coroa] nasceu em (${Math.round(startX)}, ${Math.round(startY)}) e voa até (${Math.round(targetX)}, ${Math.round(targetY)}) em ${Math.round(duration)} ms`,
+                '| animações ativas:', crown.getAnimations().length);
+        }
 
         crown.classList.add('visible');
         crownShownAt = performance.now();
 
+        // some sozinha quando termina o voo (se ninguém pegou)
         clearTimeout(crownHideTimer);
-        crownHideTimer = setTimeout(hideCrown, CROWN_LIFETIME);
+        crownHideTimer = setTimeout(hideCrown, duration);
     }
 
     // Esconde a coroa quando o tempo dela acaba

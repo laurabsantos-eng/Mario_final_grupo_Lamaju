@@ -219,6 +219,6 @@ try {
 
    <audio id="bg-music" src="musica/audio.mp3" loop preload="auto"></audio>
 
-    <script src="js/script.js" defer></script>
+    <script src="js/script.js?v=3" defer></script>
 </body>
 </html>

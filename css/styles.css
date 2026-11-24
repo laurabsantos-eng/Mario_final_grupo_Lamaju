@@ -1082,3 +1082,24 @@ body {
     width: 100px;
     bottom: 0px; /* Ajuste se o GIF estiver flutuando */
 }
+
+/* ===================================================
+   TAMANHO DAS MOEDAS (cenários com moeda pequena)
+   =================================================== */
+
+/* --- PÔNEIS (Pinkie, Rarity, Twilight) --- */
+.game-board[data-stage="pinkie"] .crown,
+.game-board[data-stage="rarity"] .crown,
+.game-board[data-stage="twilight"] .crown {
+    width: 110px;
+}
+
+/* --- BOB VAMPIRO --- */
+.game-board[data-stage="bob_vamp"] .crown {
+    width: 110px;
+}
+
+/* --- BOB APAIXONADO --- */
+.game-board[data-stage="bob_xonado"] .crown {
+    width: 110px;
+}
